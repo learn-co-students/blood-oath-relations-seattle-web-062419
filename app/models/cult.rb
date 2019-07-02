@@ -43,6 +43,52 @@ class Cult
     }
     end
 
+    def average_age
+        ages = []
+        Bloodoath.all.each do |oath|
+            if oath.cult == self
+                ages << oath.follower.age
+            end
+        end
+        ages.sum / ages.length
+    end
+
+    def my_followers_mottos
+        Bloodoath.all.select do |oath|
+            if oath.cult == self
+                print oath.follower.life_motto
+            end
+        end
+    end
+
+    def self.least_popular
+        min = 10
+        culta = ""
+
+        self.all.each do |c|
+            if c.cult_population < min
+                min = c.cult_population
+                culta = c
+            end
+        end
+        culta
+    end
+
+    def self.most_common_location
+        max = 0
+        most = ""
+        locations = []
+        self.all.collect {|x| locations << x.location}
+        
+        Cult.all.each do |c|
+            if locations.count(c.location) > max
+                max = locations.count(c.location)
+                most = c.location
+            end
+        end
+        most
+    end
+
     def self.all
         @@all
     end
