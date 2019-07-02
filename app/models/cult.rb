@@ -3,6 +3,7 @@ class Cult
     attr_accessor :name, :location, :founding_year, :slogan
     
     @@all = []
+    @@min_age = 50
 
 
     def initialize(name, location, founding_year, slogan)
@@ -16,8 +17,27 @@ class Cult
     end
 
     def recruit_follower(date, follower)
+        # without age requirement
         Bloodoath.new(date, self, follower)
     end
+
+    def minimum_age_upd(age)
+        @@min_age = age
+    end
+
+    def self.min_age
+        @@min_age
+    end
+
+    def recruit_follower_age(date, follower)
+        # with age requirement
+        if follower.age < @@min_age
+            "You are too young"
+        else
+            self.recruit_follower(date, follower)
+        end
+    end
+
 
     def cult_population
         Bloodoath.all.select do |oath|

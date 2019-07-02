@@ -42,6 +42,7 @@ class Follower
         most = ""
         names = []
         oath_names = []
+        
         self.all.each {|x| names << x.name}
         Bloodoath.all.each{|b| oath_names << b.follower.name}
 
@@ -51,7 +52,8 @@ class Follower
                 most = n
             end
     }
-        # not sure why this works but I don't trust it
+        # not sure why below solution works but I don't trust it
+        # research later
         # Bloodoath.all.each do |b|
         #     if names.count(b.follower.name) > max
         #         max = names.count(b.follower.name)
@@ -84,6 +86,20 @@ class Follower
             end
         end
         f_array.take(10)
+    end
+
+    def fellow_cult_members
+        # get all cults of self
+        mycults = self.cults
+
+        # select  all members of all cults of self
+        mycults.collect do |sc|
+            Bloodoath.all.collect do |b|
+                if b.cult == sc && b.follower != self
+                    b.follower
+                end
+            end.compact # fix this later
+        end
     end
 
     def self.all
