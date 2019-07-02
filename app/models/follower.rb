@@ -21,8 +21,16 @@ class Follower
         scults
     end
 
-    def join_cult(cult)
+    def join_cult(date, cult)
         Bloodoath.new(date, cult, self)
+    end
+
+    def join_cult_age(cult)
+        if self.age < Cult.min_age
+            "You are too young"
+        else
+            self.join_cult(cult)
+        end
     end
 
     def self.of_a_certain_age(age)
@@ -42,7 +50,7 @@ class Follower
         most = ""
         names = []
         oath_names = []
-        
+
         self.all.each {|x| names << x.name}
         Bloodoath.all.each{|b| oath_names << b.follower.name}
 
