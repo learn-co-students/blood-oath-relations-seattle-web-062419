@@ -10,6 +10,18 @@ class Bloodoath
         @follower = follower
         @@all << self
     end
+
+    def self.first_oath
+        mindate = "2020-01-01"
+        result = []
+        self.all.each do |b|
+            if b.initiation_date < mindate
+                mindate = b.initiation_date
+                result = b
+            end
+        end
+        result
+    end
     
     def self.all
         @@all
