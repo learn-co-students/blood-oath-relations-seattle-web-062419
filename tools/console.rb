@@ -16,7 +16,7 @@ dan = Follower.new("Dan", 41, "Are you hiring?")
 selina = Follower.new("Selina", 58, "Gary?")
 sue = Follower.new("Sue", 38, "N/a")
 
-bo1 = Bloodoath.new(2018-05-01, pwc, dan)
+bo1 = Bloodoath.new(2018-05-01, ey, dan)
 bo2 = Bloodoath.new(1998-04-03, kpmg, selina)
 bo3 = Bloodoath.new(2016-02-29, deloitte, sue)
 

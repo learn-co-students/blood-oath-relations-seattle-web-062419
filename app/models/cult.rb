@@ -15,20 +15,32 @@ class Cult
         @@all << self
     end
 
-    def recruit_follower(follower)
-        Bloodoath.new()
+    def recruit_follower(date, follower)
+        Bloodoath.new(date, self, follower)
     end
 
     def cult_population
+        Bloodoath.all.select do |oath|
+            oath.cult == self
+        end.count
     end
 
-    def find_by_name
+    def self.find_by_name(name)
+        self.all.find {|cult|
+            cult.name == name
+    }
     end
 
-    def self.find_by_location
+    def self.find_by_location(local)
+        self.all.find {|cult|
+            cult.location == local
+    }
     end
 
-    def self.find_by_founding_year
+    def self.find_by_founding_year(year)
+        self.all.find {|cult|
+            cult.founding_year == year
+    }
     end
 
     def self.all

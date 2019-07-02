@@ -12,13 +12,21 @@ class Follower
     end
 
     def cults
+        scults = []
+        Bloodoath.all.each do |oath|
+            if oath.follower == self
+                scults << oath.cult
+            end
+        end
+        scults
     end
 
     def join_cult(cult)
-        
+        Bloodoath.new(date, cult, self)
     end
 
     def self.of_a_certain_age(age)
+        Follower.all.select {|f| f.age > age}        
     end
 
     def self.all

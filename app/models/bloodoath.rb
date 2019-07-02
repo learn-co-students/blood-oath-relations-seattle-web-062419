@@ -10,7 +10,7 @@ class Bloodoath
         @follower = follower
         @@all << self
     end
-
+    
     def self.all
         @@all
     end
